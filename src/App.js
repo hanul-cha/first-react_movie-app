@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const foodLive = [
   {
@@ -34,20 +35,32 @@ const foodLive = [
 ]
 
 
-function Food({ name, picture }){ //props(매개변수).fav = { fav } 두게는 같음
+function Food({ name, picture, rating }){ //props(매개변수).fav = { fav } 두게는 같음
   return (
     <div>
       <h2>i like {name}</h2>
+      <h4>{rating}/5.0</h4>
       <img src={picture} alt={name}/>
     </div>
   )
 }
 
+Food.propTypes = {
+  name: PropTypes.string.isRequired,
+  picture: PropTypes.string.isRequired,
+  rating: PropTypes.string.isRequired,
+};
+
 function App() {
   return (
     <div>
       {foodLive.map(dish => (
-        <Food key={dish.id} name={dish.name} picture={dish.image} />
+        <Food 
+          key={dish.id} 
+          name={dish.name} 
+          picture={dish.image} 
+          rating={dish.rating} 
+        />
       ))}
     </div>
     
