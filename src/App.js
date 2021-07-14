@@ -1,70 +1,40 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-const foodLive = [
-  {
-    id:1,
-    name: "kimchi",
-    image: "https://cdn.pixabay.com/photo/2019/07/25/01/35/kimchi-4361465_960_720.jpg",
-    rating: 5,
-  },
-  {
-    id:2,
-    name: "raman",
-    image: "https://cdn.pixabay.com/photo/2019/11/23/15/26/ramen-4647408_960_720.jpg",
-    rating: 4.9,
-  },
-  {
-    id:3,
-    name: "kimbap",
-    image: "https://cdn.pixabay.com/photo/2019/01/25/15/46/riceroll-3954777_960_720.jpg",
-    rating: 4.8,
-  },
-  {
-    id:4,
-    name: "chicken",
-    image: "https://cdn.pixabay.com/photo/2016/11/29/05/32/rooster-1867562_960_720.jpg",
-    rating: 4.7,
-  },
-  {
-    id:5,
-    name: "nangman",
-    image: "https://cdn.pixabay.com/photo/2017/07/10/06/04/korean-food-2489214_960_720.jpg",
-    rating: 4.6,
-  },
-]
-
-
-function Food({ name, picture, rating }){ //props(매개변수).fav = { fav } 두게는 같음
-  return (
-    <div>
-      <h2>i like {name}</h2>
-      <h4>{rating}/5.0</h4>
-      <img src={picture} alt={name}/>
-    </div>
-  )
-}
-
-Food.propTypes = {
-  name: PropTypes.string.isRequired,
-  picture: PropTypes.string.isRequired,
-  rating: PropTypes.string.isRequired,
-};
-
-function App() {
-  return (
-    <div>
-      {foodLive.map(dish => (
-        <Food 
-          key={dish.id} 
-          name={dish.name} 
-          picture={dish.image} 
-          rating={dish.rating} 
-        />
-      ))}
-    </div>
-    
-  );
+//밑에 컴포넌트는 함수가 아니기대문에 return이 없어서 render를 사용해줘야함
+class App extends React.Component{ //리엑트 컴포넌트는 render()메서드를 가지고 있음 extands로 상속 받아왔기때문에  이제 App컴포넌트에서도 redner를 사용가능함
+  constructor(props) {
+    super(props);
+    console.log("hellow");
+  }
+  state = {
+    count: 0,
+  }
+  add = () => {
+    this.setState(current => ({ count: current.count +1 }));
+  };
+  minus = () => {
+    this.setState(current => ({ count: current.count -1 }));
+  };
+/* 
+  이부분에도 state를 불러 사용할수 있지만 작동하지않는다 그래서 새스테이츠를 만들어줘야함
+  setState를 호출하게 되면(setState를 호출할때 마다) react는 밑에 state를 refresh(새로고침)하고 render함수를 호출해줄것임
+*/
+  componentDidMount() {
+    console.log("component")
+  }
+  componentDidUpdate() {
+    console.log("I just Update")
+  }
+  render(){
+    console.log("I am rendering");
+    return (
+      <div>
+        <h1> number is : {this.state.count}</h1>
+        <button onClick={this.add}>Add</button>
+        <button onClick={this.minus}>minus</button>
+      </div>
+    )
+  }
 }
 
 export default App;
