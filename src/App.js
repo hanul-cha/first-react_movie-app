@@ -10,7 +10,11 @@ class App extends React.Component{ //리엑트 컴포넌트는 render()메서드
 
   //https://yts-proxy.now.sh/list_movies.json
   getMovies = async () => {
-    const movies = await axios.get("https://yts-proxy.now.sh/list_movies.json");
+    const { 
+      data: {
+        data: { movies }
+      }
+    } = await axios.get("https://yts-proxy.now.sh/list_movies.json");
     console.log(movies);
   }
   componentDidMount() {
