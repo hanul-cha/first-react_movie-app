@@ -41,6 +41,7 @@ class App extends React.Component{ //리엑트 컴포넌트는 render()메서드
                   title={movies.title} 
                   summary={movies.summary} 
                   poster={movies.medium_cover_image} 
+                  genres={movies.genres}
                 />
               ))}
             </div>
